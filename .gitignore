@@ -302,5 +302,5 @@ fabric.properties
 # Ignore all local history of files
 .history
 .ionide
-
+~$otepad.docx
 # End of https://www.toptal.com/developers/gitignore/api/django,pycharm,visualstudiocode

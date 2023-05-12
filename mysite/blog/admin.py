@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Comment
 
 
 @admin.register(Post)
@@ -13,3 +13,10 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'  # быстрая фильтрация по датам
     ordering = ['status', 'publish']  # Критерии сортировки по умолчанию. Если это не указано, администратор Django
     # будет использовать порядок модели по умолчанию.
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'post', 'created', 'active']
+    list_filter = ['active', 'created', 'updated']
+    search_fields = ['name', 'email', 'body']

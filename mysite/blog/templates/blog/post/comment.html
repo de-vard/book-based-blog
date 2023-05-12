@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+{% block title %}Add a comment{% endblock %}
+{% block content %}
+    {% if comment %} <!--если переданные данные формы валидны, то переменная comment будет содержать созданный объект comment -->
+        <h2>Your comment has been added.</h2>
+        <p><a href="{{ post.get_absolute_url }}">Back to the post</a></p>
+    {% else %} <!-- Если переданные данные формы невалидны, то переменной comment будет назначено значение None. В этом случае мы отобразим комментируемую форму. -->
+        {% include "blog/post/includes/comment_form.html" %}
+    {% endif %}
+{% endblock %}
