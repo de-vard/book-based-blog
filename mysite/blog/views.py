@@ -122,17 +122,18 @@ def post_search(request):
     form = SearchForm()
     query = None
     results = []
-
     if 'query' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
-            search_vector = SearchVector('title', config='russian', weight='A') + SearchForm('body', config='russian',
-                                                                                             weight='B')
-            search_query = SearchQuery(query, config='russian')
+            search_vector = SearchVector('title', config='russian', weight='A') + \
+                            SearchVector('body', config='russian', weight='B')
+            search_query = SearchQuery(query, config='russian')  # по нему фильтруются результаты поиска
             results = Post.published.annotate(
                 search=search_vector,
-                rank=SearchRank(search_vector, search_query)
-            ).filter(rank__gte=0.3).order_by('-rank')
+                rank=SearchRank(search_vector, search_query)  # для упорядочивания результатов по релевантности
+                # используется SearchRank
+            ).filter(rank__gte=0.3).order_by('-rank')  # Результаты фильтруются, чтобы отображать только те, у которых
+            # ранг выше 0.3
     return render(request, 'blog/post/search.html',
                   {'form': form, 'query': query, 'results': results})

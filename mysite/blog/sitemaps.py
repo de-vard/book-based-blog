@@ -3,7 +3,7 @@ from .models import Post
 
 
 class PostSitemap(Sitemap):
-    changefreq = 'weekly'  # частота изсенения страниц
+    changefreq = 'weekly'  # частота изменения страниц
     priority = 0.9  # релевантность постов на веб-странице
 
     def items(self):
