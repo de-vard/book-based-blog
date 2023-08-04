@@ -13,7 +13,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def post_list(request, tag_slug=None):
-    """Функция не используется, она как пример"""
+    """"""
     posts_list = Post.published.all()
 
     tag = None
